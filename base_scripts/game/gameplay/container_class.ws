@@ -512,7 +512,6 @@ class CContainer extends CGameplayEntity
 		return true;
 	}
 	
-	
 	function IsQuestItem() : bool
 	{
 		var allItems		: array< SItemUniqueId >;
@@ -537,7 +536,7 @@ class CContainer extends CGameplayEntity
 	{	
 		StopEffect( 'quest_glow' );
 	
-		if ( IsQuestItem() ) 
+		if ( IsQuestItem() || MoreItemsGlow() ) // More Items Glow: Added || MoreItemsGlow() to original line
 		{
 			PlayEffect( 'quest_glow' );
 		}
@@ -561,6 +560,36 @@ class CContainer extends CGameplayEntity
 		QuestItemGlow();
 		if ( hideInteractionIfEmpty ) GetComponent("Loot").SetEnabled( false );
 	}
+
+	// More Items Glow +++
+	function MoreItemsGlow() : bool
+	{
+		var allItems		: array< SItemUniqueId >;
+		var i				: int;
+		var itemTags : array< name >;
+
+		GetInventory().GetAllItems( allItems );
+
+		for ( i=0; i<allItems.Size(); i+=1 )
+		{
+			GetInventory().GetItemTags( allItems[i], itemTags );
+
+			if ( GetInventory().GetItemName( allItems[i] ) == 'Orens' ||
+				 itemTags.Contains('SortTypeBook') ||
+				 itemTags.Contains('SortTypeRecipe') ||
+				 itemTags.Contains('SortTypeSchematic') ||
+				 itemTags.Contains('SortTypeTrophy') ||
+				 itemTags.Contains('TypeRare') ||
+				 itemTags.Contains('TypeEpic') ||
+				 itemTags.Contains('SortTypePotion')
+			   )
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	// More Items Glow ---
 }
 
 // BE CAREFUL WITH INVENTORY COMPONENTS ORDER
