@@ -574,8 +574,12 @@ class CContainer extends CGameplayEntity
 		{
 			GetInventory().GetItemTags( allItems[i], itemTags );
 
+			if (itemTags.Contains('SortTypeBook') && !FactsDoesExist(NameToString(GetInventory().GetItemName( allItems[i] )) + "_Examined"))
+			{
+				return true;
+			}
+
 			if ( GetInventory().GetItemName( allItems[i] ) == 'Orens' ||
-				 itemTags.Contains('SortTypeBook') ||
 				 itemTags.Contains('SortTypeRecipe') ||
 				 itemTags.Contains('SortTypeSchematic') ||
 				 itemTags.Contains('SortTypeTrophy') ||
