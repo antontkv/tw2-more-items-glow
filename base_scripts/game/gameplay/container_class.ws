@@ -585,6 +585,10 @@ class CContainer extends CGameplayEntity
 				 itemTags.Contains('SortTypeTrophy') ||
 				 itemTags.Contains('TypeRare') ||
 				 itemTags.Contains('TypeEpic') ||
+				 itemTags.Contains('SortTypeArmorUpgrade') ||
+				 itemTags.Contains('SortTypeWeaponUpgrade') ||
+				 itemTags.Contains('SortTypeSkillUpgrade') ||
+				 itemTags.Contains('QuickSlot') ||
 				 itemTags.Contains('SortTypePotion')
 			   )
 			{
